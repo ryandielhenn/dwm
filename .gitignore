@@ -1,0 +1,13 @@
+# Compiled binary
+dwm
+
+# Object files
+*.o
+
+# Patch artifacts
+*.orig
+*.rej
+
+# Patch files (optional - remove these lines if you want to track your patches)
+*.diff
+*.patch
