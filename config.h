@@ -1,10 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/XF86keysym.h>
 
-static const char *upvol[]   = { "sh", "-c", "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+ && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *downvol[]   = { "sh", "-c", "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%- && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *mutevol[]   = { "sh", "-c", "wpctl set-mute -l 1 @DEFAULT_AUDIO_SINK@ toggle && pkill -RTMIN+10 dwmblocks", NULL };
-
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -15,6 +11,7 @@ static const unsigned int gappov    = 30;
 static       int smartgaps          = 0;
 static const int FORCE_VSPLIT       = 1;        /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
+
 /* system tray */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -22,6 +19,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int systrayonleft = 0;             /* show system tray on left (shows on right if 0) */
 static const int showsystray        = 1;        /* 0 means no systray */
 /* end system tray */
+
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
@@ -38,6 +36,8 @@ static const char *colors[][3]      = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_orange, col_orange },
 };
+
+/*autostart*/
 static const char *const autostart[] = {
     "picom", NULL,
     "sh", "-c", "$HOME/.dotfiles/scripts/wallpaper-rotator.sh", NULL,
@@ -95,6 +95,29 @@ static const char *browsercmd[] = { "firefox", NULL };
 static const char *spotifycmd[] = { "kitty", "-e", "spotify_player", NULL };
 static const char *steamcmd[] = { "flatpak", "run", "com.valvesoftware.Steam", NULL };
 static const char *discordcmd[] = { "flatpak", "run", "com.discordapp.Discord", NULL };
+static const char *upvol[] = { 
+    "sh", "-c", 
+    "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+ && "
+    "pkill -RTMIN+10 dwmblocks", 
+    NULL 
+};
+
+static const char *downvol[] = { 
+    "sh", "-c", 
+    "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%- && "
+    "pkill -RTMIN+10 dwmblocks", 
+    NULL 
+};
+
+static const char *mutevol[] = { 
+    "sh", "-c", 
+    "wpctl set-mute -l 1 @DEFAULT_AUDIO_SINK@ toggle && "
+    "pkill -RTMIN+10 dwmblocks", 
+    NULL 
+};
+static const char *medianext[] = { "playerctl", "next", NULL };
+static const char *mediaprev[] = { "playerctl", "previous", NULL };
+static const char *mediaplay[] = { "playerctl", "play-pause", NULL };
 
 
 static const Key keys[] = {
@@ -103,6 +126,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_s,      spawn,          {.v = spotifycmd } },
 	{ MODKEY|ShiftMask,             XK_s, spawn,          {.v = steamcmd } },
+	{ MODKEY|ShiftMask,             XK_d, spawn,          {.v = discordcmd } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = filemanagercmd } },
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
@@ -139,6 +163,9 @@ static const Key keys[] = {
     { 0, XF86XK_AudioRaiseVolume, spawn, {.v = upvol } },
     { 0, XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
     { 0, XF86XK_AudioMute,        spawn, {.v = mutevol } },
+    { 0, XF86XK_AudioNext,  spawn, {.v = medianext } },
+    { 0, XF86XK_AudioPrev,  spawn, {.v = mediaprev } },
+    { 0, XF86XK_AudioPlay,  spawn, {.v = mediaplay } },
 };
 
 /* button definitions */
