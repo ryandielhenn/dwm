@@ -14,7 +14,7 @@ static const int FORCE_VSPLIT       = 1;        /* nrowgrid layout: force two cl
 
 /* system tray */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const unsigned int systrayspacing = 3;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int systrayonleft = 0;             /* show system tray on left (shows on right if 0) */
 static const int showsystray        = 1;        /* 0 means no systray */
@@ -90,7 +90,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_orange, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
-static const char *filemanagercmd[] = { "nautilus", NULL };
+static const char *filemanagercmd[] = { "nemo", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
 static const char *spotifycmd[] = { "kitty", "-e", "spotify_player", NULL };
 static const char *steamcmd[] = { "flatpak", "run", "com.valvesoftware.Steam", NULL };
