@@ -95,6 +95,22 @@ static const char *browsercmd[] = { "firefox", NULL };
 static const char *spotifycmd[] = { "kitty", "-e", "spotify_player", NULL };
 static const char *steamcmd[] = { "flatpak", "run", "com.valvesoftware.Steam", NULL };
 static const char *discordcmd[] = { "flatpak", "run", "com.discordapp.Discord", NULL };
+static const char *savescreenshotcmd[] = {
+    "sh",
+    "-c",
+    "mkdir -p ~/Screenshots && "
+    "DATE=$(date +%m-%d-%Y) && "
+    "COUNTER=$(ls ~/Screenshots/screenshot_${DATE}_*.png 2>/dev/null | wc -l) && "
+    "COUNTER=$((COUNTER + 1)) && "
+    "maim -s ~/Screenshots/screenshot_${DATE}_$(printf '%03d' $COUNTER).png",
+    NULL
+};
+static const char *copyscreenshotcmd[] = {
+    "sh",
+    "-c",
+    "maim -s | xclip -selection clipboard -t image/png",
+    NULL
+};
 static const char *upvol[] = { 
     "sh", "-c", 
     "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+ && "
@@ -125,8 +141,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_s,      spawn,          {.v = spotifycmd } },
-	{ MODKEY|ShiftMask,             XK_s, spawn,          {.v = steamcmd } },
-	{ MODKEY|ShiftMask,             XK_d, spawn,          {.v = discordcmd } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = steamcmd } },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = discordcmd } },
+	{ MODKEY,                       XK_Print,  spawn,          {.v = copyscreenshotcmd } },
+	{ MODKEY|ShiftMask,             XK_Print,  spawn,          {.v = savescreenshotcmd } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = filemanagercmd } },
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
