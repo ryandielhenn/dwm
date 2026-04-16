@@ -100,16 +100,16 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY, TAG)                                                      \
-  {MODKEY, KEY, view, {.ui = 1 << TAG}},                                       \
-      {MODKEY | ControlMask, KEY, toggleview, {.ui = 1 << TAG}},               \
-      {MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},                        \
-      {MODKEY | ControlMask | ShiftMask, KEY, toggletag, {.ui = 1 << TAG}},
+    {MODKEY, KEY, view, {.ui = 1 << TAG}},                                     \
+        {MODKEY | ControlMask, KEY, toggleview, {.ui = 1 << TAG}},             \
+        {MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},                      \
+        {MODKEY | ControlMask | ShiftMask, KEY, toggletag, {.ui = 1 << TAG}},
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd)                                                             \
-  {                                                                            \
-    .v = (const char *[]) { "/bin/sh", "-c", cmd, NULL }                       \
-  }
+    {                                                                          \
+        .v = (const char *[]) { "/bin/sh", "-c", cmd, NULL }                   \
+    }
 
 /* commands */
 static char dmenumon[2] =
@@ -120,7 +120,8 @@ static const char *dmenucmd[] = {
 static const char *termcmd[] = {"kitty", NULL};
 static const char *filemanagercmd[] = {"nemo", NULL};
 static const char *browsercmd[] = {"firefox", NULL};
-static const char *spotifycmd[] = {"kitty", "-e", "spotify", NULL};
+static const char *spotifycmd[] = {"kitty", "-e", "spotify_player", NULL};
+static const char *slackcmd[] = {"slack", NULL};
 static const char *claudecmd[] = {"claude-desktop", NULL};
 static const char *steamcmd[] = {"flatpak", "run", "com.valvesoftware.Steam",
                                  NULL};
@@ -157,19 +158,22 @@ static const char *mutevol[] = {
 static const char *medianext[] = {"playerctl", "next", NULL};
 static const char *mediaprev[] = {"playerctl", "previous", NULL};
 static const char *mediaplay[] = {"playerctl", "play-pause", NULL};
+static const char *lock[] = {"i3lock", "-c", "000000", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     {MODKEY, XK_p, spawn, {.v = dmenucmd}},
     {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_s, spawn, {.v = spotifycmd}},
-    {MODKEY | ShiftMask, XK_s, spawn, {.v = steamcmd}},
+    {MODKEY | ShiftMask, XK_s, spawn, {.v = slackcmd}},
     {MODKEY | ShiftMask, XK_d, spawn, {.v = discordcmd}},
     {MODKEY | ShiftMask, XK_c, spawn, {.v = claudecmd}},
+    {MODKEY | ShiftMask, XK_g, spawn, {.v = steamcmd}},
     {MODKEY, XK_Print, spawn, {.v = copyscreenshotcmd}},
     {MODKEY | ShiftMask, XK_Print, spawn, {.v = savescreenshotcmd}},
     {MODKEY, XK_e, spawn, {.v = filemanagercmd}},
     {MODKEY, XK_b, spawn, {.v = browsercmd}},
+    {MODKEY | ShiftMask, XK_x, spawn, {.v = lock}},
     {MODKEY | ShiftMask, XK_b, togglebar, {0}},
     {MODKEY, XK_j, focusstack, {.i = +1}},
     {MODKEY, XK_k, focusstack, {.i = -1}},
