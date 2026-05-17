@@ -28,7 +28,7 @@ static const int showsystray = 1; /* 0 means no systray */
 
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1;  /* 0 means bottom bar */
-static const char *fonts[] = {"monospace:size=10"};
+static const char *fonts[] = {"monospace:size=10", "FiraCode Nerd Font Mono:size=10"};
 static const char dmenufont[] = "monospace:size=10";
 static const char col_gray1[] = "#2b3339";  // everforest bg
 static const char col_gray2[] = "#374247";  // everforest border
@@ -159,6 +159,8 @@ static const char *medianext[] = {"playerctl", "next", NULL};
 static const char *mediaprev[] = {"playerctl", "previous", NULL};
 static const char *mediaplay[] = {"playerctl", "play-pause", NULL};
 static const char *lock[] = {"i3lock", "-c", "000000", NULL};
+static const char *powermenu[] = {"/home/ryan/.dotfiles/scripts/power-menu.sh", NULL};
+static const char *inhibitsleep[] = {"/home/ryan/.dotfiles/scripts/inhibit-sleep.sh", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
@@ -174,6 +176,8 @@ static const Key keys[] = {
     {MODKEY, XK_e, spawn, {.v = filemanagercmd}},
     {MODKEY, XK_b, spawn, {.v = browsercmd}},
     {MODKEY | ShiftMask, XK_x, spawn, {.v = lock}},
+    {MODKEY | ShiftMask, XK_p, spawn, {.v = powermenu}},
+    {MODKEY | ShiftMask, XK_i, spawn, {.v = inhibitsleep}},
     {MODKEY | ShiftMask, XK_b, togglebar, {0}},
     {MODKEY, XK_j, focusstack, {.i = +1}},
     {MODKEY, XK_k, focusstack, {.i = -1}},
