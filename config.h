@@ -125,8 +125,11 @@ static const char *slackcmd[] = {"slack", NULL};
 static const char *claudecmd[] = {"claude-desktop", NULL};
 static const char *steamcmd[] = {"flatpak", "run", "com.valvesoftware.Steam",
                                  NULL};
-static const char *discordcmd[] = {"flatpak", "run", "com.discordapp.Discord",
-                                   NULL};
+static const char *discordcmd[] = {
+    "sh", "-c",
+    "flatpak info com.discordapp.Discord >/dev/null 2>&1 && "
+    "flatpak run com.discordapp.Discord || discord",
+    NULL};
 static const char *savescreenshotcmd[] = {
     "sh", "-c",
     "mkdir -p ~/Screenshots && "
