@@ -44,7 +44,7 @@ static const char *colors[][3] = {
 
 /*autostart*/
 static const char *const autostart[] = {
-    "picom",
+    "picom", "--backend", "xrender",
     NULL,
     "sh",
     "-c",
