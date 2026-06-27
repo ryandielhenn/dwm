@@ -28,8 +28,8 @@ static const int showsystray = 1; /* 0 means no systray */
 
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1;  /* 0 means bottom bar */
-static const char *fonts[] = {"monospace:size=10", "FiraCode Nerd Font Mono:size=10"};
-static const char dmenufont[] = "monospace:size=10";
+static const char *fonts[] = {"monospace:size=12", "FiraCode Nerd Font Mono:size=12"};
+static const char dmenufont[] = "monospace:size=12";
 static const char col_gray1[] = "#2b3339";  // everforest bg
 static const char col_gray2[] = "#374247";  // everforest border
 static const char col_gray3[] = "#d3c6aa";  // everforest fg
@@ -44,11 +44,13 @@ static const char *colors[][3] = {
 
 /*autostart*/
 static const char *const autostart[] = {
-    "picom", "--backend", "xrender",
+    "setxkbmap", "-option", "caps:escape",
     NULL,
-    "sh",
-    "-c",
-    "$HOME/.dotfiles/scripts/wallpaper-rotator.sh",
+    "sh", "-c", "$HOME/.dotfiles/scripts/wallpaper-rotator.sh",
+    NULL,
+    "dunst",
+    NULL,
+    "picom", "--backend", "glx",
     NULL,
     "xrandr",
     "--output",
@@ -121,14 +123,12 @@ static const char *termcmd[] = {"kitty", NULL};
 static const char *filemanagercmd[] = {"nemo", NULL};
 static const char *browsercmd[] = {"firefox", NULL};
 static const char *spotifycmd[] = {"kitty", "-e", "spotify_player", NULL};
-static const char *slackcmd[] = {"slack", NULL};
+static const char *slackcmd[] = {"flatpak", "run", "com.slack.Slack", NULL};
 static const char *claudecmd[] = {"claude-desktop", NULL};
 static const char *steamcmd[] = {"flatpak", "run", "com.valvesoftware.Steam",
                                  NULL};
 static const char *discordcmd[] = {
-    "sh", "-c",
-    "flatpak info com.discordapp.Discord >/dev/null 2>&1 && "
-    "flatpak run com.discordapp.Discord || discord",
+    "discord",
     NULL};
 static const char *savescreenshotcmd[] = {
     "sh", "-c",
@@ -141,6 +141,8 @@ static const char *savescreenshotcmd[] = {
     NULL};
 static const char *copyscreenshotcmd[] = {
     "sh", "-c", "maim -s | xclip -selection clipboard -t image/png", NULL};
+static const char *upbrightness[] = {"brightnessctl", "s", "5%+", NULL};
+static const char *downbrightness[] = {"brightnessctl", "s", "5%-", NULL};
 static const char *upvol[] = {
     "sh", "-c",
     "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+ && "
@@ -155,7 +157,7 @@ static const char *downvol[] = {
 
 static const char *mutevol[] = {
     "sh", "-c",
-    "wpctl set-mute -l 1 @DEFAULT_AUDIO_SINK@ toggle && "
+    "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && "
     "pkill -RTMIN+10 dwmblocks",
     NULL};
 static const char *medianext[] = {"playerctl", "next", NULL};
@@ -211,6 +213,8 @@ static const Key keys[] = {
     {0, XF86XK_AudioNext, spawn, {.v = medianext}},
     {0, XF86XK_AudioPrev, spawn, {.v = mediaprev}},
     {0, XF86XK_AudioPlay, spawn, {.v = mediaplay}},
+    {0, XF86XK_MonBrightnessUp, spawn, {.v = upbrightness}},
+    {0, XF86XK_MonBrightnessDown, spawn, {.v = downbrightness}},
 };
 
 /* button definitions */
