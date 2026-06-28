@@ -15,29 +15,32 @@ static const int FORCE_VSPLIT =
 
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1;  /* 0 means bottom bar */
-static const char *fonts[] = {"monospace:size=12", "FiraCode Nerd Font Mono:size=12"};
+static const char *fonts[] = {"monospace:size=12",
+                              "FiraCode Nerd Font Mono:size=12"};
 static const char dmenufont[] = "monospace:size=14";
 static const char col_gray1[] = "#2b3339";  // everforest bg
 static const char col_gray2[] = "#374247";  // everforest border
 static const char col_gray3[] = "#d3c6aa";  // everforest fg
 static const char col_gray4[] = "#2b3339";  // dark text for selected
 static const char col_gray5[] = "#181c1f";  // dark background for selected
-static const char col_green[] = "#a7c080"; // green
-static const char col_orange[] = "#ebac90"; //orange
+static const char col_green[] = "#a7c080";  // green
+static const char col_orange[] = "#ebac90"; // orange
 
-static unsigned int baralpha        = 0xc0;
-static unsigned int borderalpha     = OPAQUE;
+static unsigned int baralpha = 0xc0;
+static unsigned int borderalpha = OPAQUE;
 
 static const char *colors[][3] = {
     /*               fg         bg         border   */
-    [SchemeNorm] = {col_gray3, col_gray1, col_gray2},
-    [SchemeSel] = {col_gray3, col_gray5, col_gray5},
+    [SchemeNorm] = {col_gray3, col_gray5, col_gray5},
+    [SchemeSel] = {col_gray3, col_gray1, col_gray2},
 
 };
 
 /*autostart*/
 static const char *const autostart[] = {
-    "setxkbmap", "-option", "caps:escape",
+    "setxkbmap",
+    "-option",
+    "caps:escape",
     NULL,
     "dunst",
     NULL,
@@ -108,12 +111,18 @@ static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
 /* commands */
 static const char *dmenucmd[] = {
-    "dmenu_run", "-m",  dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf",
+    "dmenu_run", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf",
     col_gray3,   "-sb", col_orange, "-sf", col_gray4, NULL};
 static const char *dmenuwallcmd[] = {
     "/home/ryan/.dotfiles/scripts/wallpaper-picker.sh",
     "/home/ryan/Pictures/wallpapers/walls",
-    "75", dmenufont, col_gray1, col_gray3, col_gray5, col_gray3, NULL};
+    "75",
+    dmenufont,
+    col_gray1,
+    col_gray3,
+    col_gray5,
+    col_gray3,
+    NULL};
 static const char *termcmd[] = {"kitty", NULL};
 static const char *filemanagercmd[] = {"nemo", NULL};
 static const char *browsercmd[] = {"firefox", NULL};
@@ -122,9 +131,7 @@ static const char *slackcmd[] = {"flatpak", "run", "com.slack.Slack", NULL};
 static const char *claudecmd[] = {"claude-desktop", NULL};
 static const char *steamcmd[] = {"flatpak", "run", "com.valvesoftware.Steam",
                                  NULL};
-static const char *discordcmd[] = {
-    "discord",
-    NULL};
+static const char *discordcmd[] = {"discord", NULL};
 static const char *savescreenshotcmd[] = {
     "sh", "-c",
     "mkdir -p ~/Screenshots && "
@@ -150,17 +157,18 @@ static const char *downvol[] = {
     "pkill -RTMIN+10 dwmblocks",
     NULL};
 
-static const char *mutevol[] = {
-    "sh", "-c",
-    "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && "
-    "pkill -RTMIN+10 dwmblocks",
-    NULL};
+static const char *mutevol[] = {"sh", "-c",
+                                "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && "
+                                "pkill -RTMIN+10 dwmblocks",
+                                NULL};
 static const char *medianext[] = {"playerctl", "next", NULL};
 static const char *mediaprev[] = {"playerctl", "previous", NULL};
 static const char *mediaplay[] = {"playerctl", "play-pause", NULL};
 static const char *lock[] = {"i3lock", "-c", "000000", NULL};
-static const char *powermenu[] = {"/home/ryan/.dotfiles/scripts/power-menu.sh", NULL};
-static const char *inhibitsleep[] = {"/home/ryan/.dotfiles/scripts/inhibit-sleep.sh", NULL};
+static const char *powermenu[] = {"/home/ryan/.dotfiles/scripts/power-menu.sh",
+                                  NULL};
+static const char *inhibitsleep[] = {
+    "/home/ryan/.dotfiles/scripts/inhibit-sleep.sh", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
