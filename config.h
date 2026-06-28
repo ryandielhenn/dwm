@@ -21,12 +21,18 @@ static const char col_gray1[] = "#2b3339";  // everforest bg
 static const char col_gray2[] = "#374247";  // everforest border
 static const char col_gray3[] = "#d3c6aa";  // everforest fg
 static const char col_gray4[] = "#2b3339";  // dark text for selected
-static const char col_orange[] = "#a7c080"; // orange
+static const char col_gray5[] = "#181c1f";  // dark background for selected
+static const char col_green[] = "#a7c080"; // green
+static const char col_orange[] = "#ebac90"; //orange
+
+static unsigned int baralpha        = 0xc0;
+static unsigned int borderalpha     = OPAQUE;
 
 static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = {col_gray3, col_gray1, col_gray2},
-    [SchemeSel] = {col_gray4, col_orange, col_orange},
+    [SchemeSel] = {col_gray3, col_gray5, col_gray5},
+
 };
 
 /*autostart*/
@@ -98,16 +104,16 @@ static const Layout layouts[] = {
         .v = (const char *[]) { "/bin/sh", "-c", cmd, NULL }                   \
     }
 
-/* commands */
 static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
+/* commands */
 static const char *dmenucmd[] = {
-    "dmenu_run", "-a", "100", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf",
+    "dmenu_run", "-m",  dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf",
     col_gray3,   "-sb", col_orange, "-sf", col_gray4, NULL};
 static const char *dmenuwallcmd[] = {
     "/home/ryan/.dotfiles/scripts/wallpaper-picker.sh",
     "/home/ryan/Pictures/wallpapers/walls",
-    dmenumon, dmenufont, col_gray1, col_gray3, "#1f2a30", col_gray3, NULL};
+    "75", dmenufont, col_gray1, col_gray3, col_gray5, col_gray3, NULL};
 static const char *termcmd[] = {"kitty", NULL};
 static const char *filemanagercmd[] = {"nemo", NULL};
 static const char *browsercmd[] = {"firefox", NULL};
