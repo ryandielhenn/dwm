@@ -38,6 +38,10 @@ static const char *colors[][3] = {
 
 /*autostart*/
 static const char *const autostart[] = {
+    "feh",
+    "--bg-scale",
+    "/home/ryan/Pictures/wallpapers/walls/pick.jpg",
+    NULL,
     "setxkbmap",
     "-option",
     "caps:escape",
@@ -112,7 +116,7 @@ static char dmenumon[2] =
 /* commands */
 static const char *dmenucmd[] = {
     "dmenu_run", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf",
-    col_gray3,   "-sb", col_orange, "-sf", col_gray4, NULL};
+    col_gray3,   "-sb", col_gray3, "-sf", col_gray4, NULL};
 static const char *dmenuwallcmd[] = {
     "/home/ryan/.dotfiles/scripts/wallpaper-picker.sh",
     "/home/ryan/Pictures/wallpapers/walls",
