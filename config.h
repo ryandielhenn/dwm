@@ -13,23 +13,10 @@ static const int FORCE_VSPLIT =
     1; /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
 
-/* system tray */
-static const unsigned int systraypinning =
-    0; /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor
-          X */
-static const unsigned int systrayspacing = 3; /* systray spacing */
-static const int systraypinningfailfirst =
-    1; /* 1: if pinning fails, display systray on the first monitor, False:
-          display systray on the last monitor*/
-static const int systrayonleft =
-    0; /* show system tray on left (shows on right if 0) */
-static const int showsystray = 1; /* 0 means no systray */
-/* end system tray */
-
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1;  /* 0 means bottom bar */
 static const char *fonts[] = {"monospace:size=12", "FiraCode Nerd Font Mono:size=12"};
-static const char dmenufont[] = "monospace:size=12";
+static const char dmenufont[] = "monospace:size=14";
 static const char col_gray1[] = "#2b3339";  // everforest bg
 static const char col_gray2[] = "#374247";  // everforest border
 static const char col_gray3[] = "#d3c6aa";  // everforest fg
@@ -46,11 +33,9 @@ static const char *colors[][3] = {
 static const char *const autostart[] = {
     "setxkbmap", "-option", "caps:escape",
     NULL,
-    "sh", "-c", "$HOME/.dotfiles/scripts/wallpaper-rotator.sh",
-    NULL,
     "dunst",
     NULL,
-    "picom", "--backend", "glx",
+    "picom",
     NULL,
     "xrandr",
     "--output",
@@ -117,8 +102,12 @@ static const Layout layouts[] = {
 static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {
-    "dmenu_run", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf",
+    "dmenu_run", "-a", "100", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf",
     col_gray3,   "-sb", col_orange, "-sf", col_gray4, NULL};
+static const char *dmenuwallcmd[] = {
+    "/home/ryan/.dotfiles/scripts/wallpaper-picker.sh",
+    "/home/ryan/Pictures/wallpapers/walls",
+    dmenumon, dmenufont, col_gray1, col_gray3, "#1f2a30", col_gray3, NULL};
 static const char *termcmd[] = {"kitty", NULL};
 static const char *filemanagercmd[] = {"nemo", NULL};
 static const char *browsercmd[] = {"firefox", NULL};
@@ -170,6 +159,7 @@ static const char *inhibitsleep[] = {"/home/ryan/.dotfiles/scripts/inhibit-sleep
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     {MODKEY, XK_p, spawn, {.v = dmenucmd}},
+    {MODKEY, XK_w, spawn, {.v = dmenuwallcmd}},
     {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_s, spawn, {.v = spotifycmd}},
     {MODKEY | ShiftMask, XK_s, spawn, {.v = slackcmd}},
