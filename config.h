@@ -76,7 +76,10 @@ static const Rule rules[] = {
     // This is a noop example; the Firefox binary ships with lowercase title -
     // "firefox"
     // class      instance    title       tags mask     isfloating   monitor
-    { "Firefox", NULL, NULL, 1 << 8, 0, -1 },
+    { "spotify_player", NULL, NULL, 1 << 1, 0, -1 },
+    { "firefox", NULL, NULL, 1 << 2, 0, -1 },
+    { "discord", NULL, NULL, 1 << 3, 0, -1 },
+    { "com.slack.Slack", NULL, NULL, 1 << 4, 0, -1 },
 };
 
 /* layout(s) */
@@ -93,23 +96,6 @@ static const Layout layouts[] = {
     { "><>", NULL }, /* no layout function means floating behavior */
     { "[M]", monocle },
 };
-
-/* key definitions */
-#define MODKEY Mod4Mask
-#define TAGKEYS(KEY, TAG)                                                     \
-    { MODKEY, KEY, view, { .ui = 1 << TAG } },                                \
-        { MODKEY | ControlMask, KEY, toggleview, { .ui = 1 << TAG } },        \
-        { MODKEY | ShiftMask, KEY, tag, { .ui = 1 << TAG } },                 \
-        { MODKEY | ControlMask | ShiftMask,                                   \
-          KEY,                                                                \
-          toggletag,                                                          \
-          { .ui = 1 << TAG } },
-
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd)                                                            \
-    {                                                                         \
-        .v = (const char *[]) { "/bin/sh", "-c", cmd, NULL }                  \
-    }
 
 static char dmenumon[2]
     = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -131,7 +117,8 @@ static const char *dmenuwallcmd[]
 static const char *termcmd[] = { "kitty", NULL };
 static const char *filemanagercmd[] = { "nemo", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
-static const char *spotifycmd[] = { "kitty", "-e", "spotify_player", NULL };
+static const char *spotifycmd[]
+    = { "kitty", "--class", "spotify_player", "-e", "spotify_player", NULL };
 static const char *slackcmd[] = { "flatpak", "run", "com.slack.Slack", NULL };
 static const char *claudecmd[] = { "claude-desktop", NULL };
 static const char *steamcmd[]
@@ -177,6 +164,20 @@ static const char *powermenu[]
     = { "/home/ryan/.dotfiles/scripts/power-menu.sh", NULL };
 static const char *inhibitsleep[]
     = { "/home/ryan/.dotfiles/scripts/inhibit-sleep.sh", NULL };
+
+/* key definitions */
+#define MODKEY Mod4Mask
+#define TAGKEYS(KEY, TAG)                                                     \
+    { MODKEY, KEY, view, { .ui = 1 << TAG } },                                \
+        { Mod1Mask, KEY, toggleview, { .ui = 1 << TAG } },                    \
+        { MODKEY | ShiftMask, KEY, tag, { .ui = 1 << TAG } },                 \
+        { Mod1Mask | ShiftMask, KEY, toggletag, { .ui = 1 << TAG } },
+
+/* helper for spawning shell commands in the pre dwm-5.0 fashion */
+#define SHCMD(cmd)                                                            \
+    {                                                                         \
+        .v = (const char *[]) { "/bin/sh", "-c", cmd, NULL }                  \
+    }
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
