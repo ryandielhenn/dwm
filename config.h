@@ -76,6 +76,7 @@ static const Rule rules[] = {
     // This is a noop example; the Firefox binary ships with lowercase title -
     // "firefox"
     // class      instance    title       tags mask     isfloating   monitor
+    { "kitty", NULL, NULL, 1 << 0, 0, -1 },
     { "spotify_player", NULL, NULL, 1 << 1, 0, -1 },
     { "firefox", NULL, NULL, 1 << 2, 0, -1 },
     { "discord", NULL, NULL, 1 << 3, 0, -1 },
