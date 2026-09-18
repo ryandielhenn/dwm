@@ -76,7 +76,7 @@ static const Rule rules[] = {
     // This is a noop example; the Firefox binary ships with lowercase title -
     // "firefox"
     // class      instance    title       tags mask     isfloating   monitor
-    { "spotify_player", NULL, NULL, 1 << 1, 0, -1 },
+    { "spotify-launcher", NULL, NULL, 1 << 1, 0, -1 },
     { "firefox", NULL, NULL, 1 << 2, 0, -1 },
     { "discord", NULL, NULL, 1 << 3, 0, -1 },
     { "com.slack.Slack", NULL, NULL, 1 << 4, 0, -1 },
@@ -117,8 +117,9 @@ static const char *dmenuwallcmd[]
 static const char *termcmd[] = { "kitty", NULL };
 static const char *filemanagercmd[] = { "nemo", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
-static const char *spotifycmd[]
-    = { "kitty", "--class", "spotify_player", "-e", "spotify_player", NULL };
+static const char *spotifycmd[] = {
+    "kitty", "--class", "spotify-launcher", "-e", "spotify-launcher", NULL
+};
 static const char *slackcmd[] = { "flatpak", "run", "com.slack.Slack", NULL };
 static const char *claudecmd[] = { "claude-desktop", NULL };
 static const char *steamcmd[]
